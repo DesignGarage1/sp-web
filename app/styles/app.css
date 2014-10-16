@@ -64,6 +64,16 @@ html, body {
   height: 10px;
 }
 
+#btn-add {
+  background-image: url('https://fbstatic-a.akamaihd.net/rsrc.php/v2/yQ/r/KpjfgHTPu3g.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: -158px -25px;
+  height: 54px;
+  width: 54px;
+  margin: 6px;
+}
+
 img.icon {
   height: 45px;
 }

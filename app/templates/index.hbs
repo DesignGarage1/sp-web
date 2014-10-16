@@ -22,9 +22,11 @@
           {{/if}}
         </div>
       {{/each}}
-      <label class="image-container">
+      <div class="image-container">
+        <label id="btn-add">
         {{#view 'upload' id="upload"}}{{/view}}
-      </label>
+        </label>
+      </div>
     </div>
     {{#if isDone}}
     <p class="message">Success! Your photos were sent</p>
