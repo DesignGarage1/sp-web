@@ -1,61 +1,39 @@
 import Ember from 'ember';
 
 
+var UPLOAD_STATE_INIT = 0,
+    UPLOAD_STATE_UPLOADING = 1,
+    UPLOAD_STATE_FINISHED = 2;
+
+
 var FileObject = Ember.Object.extend({
-  name: '',
-  size: 0,
-  didError: false,
-  errorMessage: null,
-
-  // {Property} Will be an HTML5 File
   fileToUpload: null,
-
-  // {Property} Will be a $.ajax jqXHR
-  uploadJqXHR: null,
-
-  // {Property} Promise for when a file was uploaded
   uploadPromise: null,
-
-  // {Property} Upload progress 0-100
   uploadProgress: null,
-
-  // {Property} If a file is currently being uploaded
-  isUploading: false,
-
-  // {Property} If the file was uploaded successfully
-  didUpload: false,
-
-  // {{Property}} URL of image after uploaded
+  uploadState: null,
   serverUrl: null,
 
   init: function() {
     this._super();
     this.set('uploadPromise', Ember.RSVP.defer());
+    this.set('uploadState', UPLOAD_STATE_INIT);
   },
 
-  readFile: function() {
-    var self = this;
-    var fileToUpload = this.get('fileToUpload');
-    this.set('name', fileToUpload.name);
-    this.set('size', fileToUpload.size);
+  isUploading: function() {
+    return this.get('uploadState') === UPLOAD_STATE_UPLOADING;
+  }.property('uploadState'),
 
-    // Don't read anything bigger than 5 MB
-    if (fileToUpload.size < 2 * 1024 * 1024) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        console.log("start read file " + self.get('name'));
-        self.set('base64Image', e.target.result);
-        console.log("end read file " + self.get('name'));
-      };
-      reader.readAsDataURL(fileToUpload);
-    }
-
-  },
+  progressStyle: function() {
+    return 'width: %@%'.fmt(this.get('progress'));
+  }.property('progress'),
 
   uploadTo: function(url) {
-    if(this.get('isUploading') || this.get('didUpload') || this.get('didError')) {
+    if(this.isUploading) {
       return this.get('uploadPromise');
     }
+
+    this.set('uploadState', UPLOAD_STATE_UPLOADING);
+    this.set('progress', 0);
 
     var fileToUpload = this.get('fileToUpload');
     var fd = new FormData();
@@ -63,8 +41,6 @@ var FileObject = Ember.Object.extend({
 
     fd.append('Content-Type', fileToUpload.type);
     fd.append('file', fileToUpload);
-
-    this.set('isUploading', true);
 
     $.ajax({
       url: url,
@@ -80,32 +56,20 @@ var FileObject = Ember.Object.extend({
         };
         return xhr ;
       }
-    }).done(function(data, textStatus, jqXHR) {
+    }).done(function(data) {
       if (data.error !== undefined) {
-        self.set('isUploading', false);
-        self.set('progress', 0);
         self.uploadTo(url);
       } else {
-        var serverUrl = data.url + '?w=65&h=65';
-        self.set('serverUrl', serverUrl);
+        self.set('uploadState', UPLOAD_STATE_FINISHED);
+        self.set('serverUrl', data.url + '?w=65&h=65');
       }
-      self.set('isUploading', false);
-      self.set('didUpload', true);
-      self.get('uploadPromise').resolve(data);
-    }).fail(function(jqXHR, textStatus, errorThrown) {
-      self.set('isUploading', false);
-      self.set('progress', 0);
+    }).fail(function() {
       self.uploadTo(url);
-      self.get('uploadPromise').reject(errorThrown);
     });
 
     return this.get('uploadPromise');
   },
 
-  progressStyle: function() {
-      return 'width: %@%'.fmt(this.get('progress'));
-  }.property('progress')
 });
-
 
 export default FileObject;
