@@ -1,5 +1,6 @@
 import Ember from 'ember';
-import {UploadMixin, FileObject} from 't17-ember-upload';
+import UploadMixin from 'web/libs/upload';
+import FileObject from 'web/libs/file';
 
 
 export default Ember.Controller.extend(UploadMixin, {
@@ -8,13 +9,6 @@ export default Ember.Controller.extend(UploadMixin, {
     actions: {
       done: function() {
         this.set('isDone', true);
-      },
-      filesDropped: function(files){
-        for (var i = 0; i < files.length; i++) {
-          var fileUploadModel = FileObject.create({ fileToUpload: files[i] });
-          this.get('files').pushObject(fileUploadModel);
-          this.send('uploadFile', fileUploadModel);
-        }
-      },
+      }
     }
 });

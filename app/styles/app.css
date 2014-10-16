@@ -39,14 +39,29 @@ html, body {
   text-align: left;
 }
 
-.image {
+.image-container {
+  position: relative;
   vertical-align: top;
+  display: inline-block;
   width: 65px;
   height: 65px;
   margin: 4px 1px;
   -webkit-box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.7);
   -moz-box-shadow:    2px 2px 5px 0px rgba(50, 50, 50, 0.7);
   box-shadow:         2px 2px 5px 0px rgba(50, 50, 50, 0.7);
+}
+
+.image {
+  width: 65px;
+  height: 65px;
+}
+
+.progress {
+  position: absolute;
+  top: 50px;
+  left: 5px;
+  width: 50px;
+  height: 8px;
 }
 
 img.icon {
@@ -75,3 +90,4 @@ input[type="file"] {
   position: fixed;
   top: -1000px;
 }
+

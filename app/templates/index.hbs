@@ -13,12 +13,17 @@
   <div id="added-image">
     <div id="image-area" class="box">
       {{#each file in files}}
-      <img {{bind-attr src=file.base64Image}} class="image" />
+        <div class="image-container">
+          <img {{bind-attr src=file.serverUrl}} class="image" />
+          {{#if file.isUploading}}
+          <div class="progress progress-striped">
+            <div class="progress-bar progress-bar-info" {{bind-attr style="file.progressStyle"}}></div>
+          </div>
+          {{/if}}
+        </div>
       {{/each}}
-      <label class="image">
-        {{#view 'upload'}}
-          {{view view.MultipleImageInput id="upload"}}
-        {{/view}}
+      <label class="image-container">
+        {{#view 'upload' id="upload"}}{{/view}}
       </label>
     </div>
     {{#if isDone}}
@@ -34,9 +39,7 @@
   <div id="asking-add-image" class="box">
     <label class="btn btn-default">
       Add Photos
-      {{#view 'upload'}}
-        {{view view.MultipleImageInput id="upload"}}
-      {{/view}}
+      {{#view 'upload' id="upload"}}{{/view}}
     </label>
   </div>
   {{/if}}
