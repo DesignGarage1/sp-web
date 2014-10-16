@@ -1,0 +1,59 @@
+<div id="mobile-content">
+  <div id="header">
+    <div class="introduction">
+      Add a few photos to <br />{{model.member.name}}'s album
+    </div>
+    <div class="message">
+      {{model.book.name}}<br />{{model.book.created}}
+    </div>
+  </div>
+
+  {{#if files}}
+
+  <div id="added-image">
+    <div id="image-area" class="box">
+      {{#each file in files}}
+      <img {{bind-attr src=file.base64Image}} class="image" />
+      {{/each}}
+      <label class="image">
+        {{#view 'upload'}}
+          {{view view.MultipleInput id="upload"}}
+        {{/view}}
+      </label>
+    </div>
+    {{#if isDone}}
+    <p class="message">Success! Your photos were sent</p>
+    {{else}}
+    <div id="done">
+      <button class="btn btn-default" {{action 'done'}}>Done</button>
+    </div>
+    {{/if}}
+  </div>
+
+  {{else}}
+  <div id="asking-add-image" class="box">
+    <label class="btn btn-default">
+      Add Photos
+      {{#view 'upload'}}
+        {{view view.MultipleInput id="upload"}}
+      {{/view}}
+    </label>
+  </div>
+  {{/if}}
+
+  {{#if isDone}}
+  <div id="footer">
+    <p>Install SimplePrints to view album</p>
+    <div id="download-section">
+      <img src="https://simpleprints-static-production.s3.amazonaws.com/images/simpleprints/turnable_book/simpleprints-icon.png" class="icon" />
+      <a href="#" >
+        <img src="https://simpleprints-static-production.s3.amazonaws.com/images/simpleprints/book/apple-store-icon.png" class="icon" />
+      </a>
+      <a href="#">
+        <img src="https://simpleprints-static-production.s3.amazonaws.com/images/simpleprints/book/google-play-icon.png" class="icon" />
+      </a>
+    </div>
+  </div>
+  {{/if}}
+
+</div>

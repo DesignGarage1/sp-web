@@ -1,3 +1,77 @@
 html, body {
-  margin: 20px;
+  margin: 20px 0px;
+}
+
+#mobile-content {
+  text-align: center;
+  margin: 0px auto;
+  padding: 10px;
+  max-width: 320px;
+}
+
+#header {
+  margin-bottom: 50px;
+}
+
+#footer {
+  margin: 30px 0px;
+}
+
+.introduction {
+  font-size: 25px;
+  line-height: 28px;
+}
+
+.message {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 18px;
+}
+
+.box {
+  border: 1px solid #ddd;
+}
+
+#image-area {
+  padding: 8px;
+  margin: 50px 0px 10px 0px;
+  text-align: left;
+}
+
+.image {
+  vertical-align: top;
+  width: 65px;
+  height: 65px;
+  margin: 4px 1px;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.7);
+  -moz-box-shadow:    2px 2px 5px 0px rgba(50, 50, 50, 0.7);
+  box-shadow:         2px 2px 5px 0px rgba(50, 50, 50, 0.7);
+}
+
+img.icon {
+  height: 45px;
+}
+
+#asking-add-image {
+  height: 300px;
+  padding-top: 130px;
+}
+
+#done {
+  margin-top: 50px;
+}
+
+.btn {
+  border-radius: 0px;
+  width: 200px;
+  height: 40px;
+  -webkit-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.3);
+  -moz-box-shadow:    1px 1px 2px 0px rgba(50, 50, 50, 0.3);
+  box-shadow:         1px 1px 2px 0px rgba(50, 50, 50, 0.3);
+}
+
+input[type="file"] {
+  position: fixed;
+  top: -1000px;
 }
