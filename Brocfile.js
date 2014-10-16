@@ -7,6 +7,9 @@ var app = new EmberApp();
 // Bootstrap
 app.import('bower_components/bootstrap/dist/js/bootstrap.js');
 app.import('bower_components/bootstrap/dist/css/bootstrap.css');
+app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
+    destDir: 'assets'
+});
 
 // t17-ember-upload
 app.import('bower_components/t17-ember-upload/dist/t17-ember-upload.js', {
