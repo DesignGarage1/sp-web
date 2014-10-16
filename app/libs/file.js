@@ -86,14 +86,16 @@ var FileObject = Ember.Object.extend({
         self.set('progress', 0);
         self.uploadTo(url);
       } else {
-        self.set('serverUrl', data.s3Url);
+        var serverUrl = data.url + '?w=65&h=65';
+        self.set('serverUrl', serverUrl);
       }
       self.set('isUploading', false);
       self.set('didUpload', true);
       self.get('uploadPromise').resolve(data);
     }).fail(function(jqXHR, textStatus, errorThrown) {
       self.set('isUploading', false);
-      self.set('didError', true);
+      self.set('progress', 0);
+      self.uploadTo(url);
       self.get('uploadPromise').reject(errorThrown);
     });
 
