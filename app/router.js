@@ -5,8 +5,4 @@ var Router = Ember.Router.extend({
   location: config.locationType
 });
 
-Router.map(function() {
-  this.resource("category");
-});
-
 export default Router;

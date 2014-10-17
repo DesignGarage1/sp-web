@@ -19,10 +19,11 @@ var UploadMixin = Ember.Mixin.create({
     },
 
     filesDropped: function(files){
+      var self = this;
       for (var i = 0; i < files.length; i++) {
         var fileUploadModel = FileObject.create({ fileToUpload: files[i] });
         this.get('files').pushObject(fileUploadModel);
-        fileUploadModel.uploadTo(this.get('uploadUrl'));
+        fileUploadModel.uploadTo(self.get('uploadUrl'));
       }
     },
   }
