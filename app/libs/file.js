@@ -27,7 +27,7 @@ var FileObject = Ember.Object.extend({
     return 'width: %@%'.fmt(this.get('progress'));
   }.property('progress'),
 
-  uploadTo: function(url) {
+  uploadTo: function(url, code) {
     if(this.isUploading) {
       return this.get('uploadPromise');
     }
@@ -40,6 +40,7 @@ var FileObject = Ember.Object.extend({
     var self = this;
 
     fd.append('Content-Type', fileToUpload.type);
+    fd.append('code', code);
     fd.append('file', fileToUpload);
 
     $.ajax({
@@ -61,7 +62,7 @@ var FileObject = Ember.Object.extend({
         self.uploadTo(url);
       } else {
         self.set('uploadState', UPLOAD_STATE_FINISHED);
-        self.set('serverUrl', data.url + '?w=65&h=65');
+        self.set('serverUrl', data.crop_url);
       }
     }).fail(function() {
       self.uploadTo(url);

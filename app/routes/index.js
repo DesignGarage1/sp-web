@@ -1,16 +1,9 @@
 import Ember from "ember";
+import Member from "web/models/member"
 
 
 export default Ember.Route.extend({
-  model: function() {
-    return Ember.Object.create({
-      member: {
-        name: "Matt Sullivan"
-      },
-      book: {
-        name: "Adventures in Hawaii",
-        created: "October 2014"
-      },
-    });
+  model: function(params) {
+    return Member.find(params.code);
   }
 });
