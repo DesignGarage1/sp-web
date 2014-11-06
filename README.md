@@ -1,3 +1,3 @@
-## SP WEB
+## Simpleprints web labs
 
 Labs for simpleprints
