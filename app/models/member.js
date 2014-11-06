@@ -11,6 +11,8 @@ Member.reopenClass({
     return $.getJSON(url).then(function(data) {
       data.code = code;
       return Member.create(data);
+    }, function(data) {
+      return Member.create(data);
     });
   }
 
