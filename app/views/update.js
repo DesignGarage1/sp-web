@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 
 export default Ember.View.extend({
@@ -11,8 +12,9 @@ export default Ember.View.extend({
         fd.append('email', email);
         fd.append('relationship', relationship);
 
+        var code = this.get('controller').get('model').get('code');
         $.ajax({
-            url: 'http://localhost:8000/labs/code/MrbvLIQiBb/update/',
+            url: config.APP.API_URL + '/labs/code/' + code + '/update/',
             type: "POST",
             data: fd,
             processData: false,
