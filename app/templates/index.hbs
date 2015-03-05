@@ -37,16 +37,21 @@
       <table>
         <tr>
           <td width="40%">Name:</td>
-          <td width="60%"><input type="text" name="name" width="100px" id="name"></td>
+          <td width="60%">{{ input width="100px" valueBinding=name }}</td>
         </tr>
         <tr>
           <td width="40%">Email (optional):</td>
-          <td width="60%"><input type="text" name="email" width="100px" id="email"></td>
+          <td width="60%">{{ input width="100px" valueBinding=email }}</td>
         </tr>
         <tr>
           <td width="40%">Relationship:</td>
-          <td width="60%"><input type="text" name="relationship" width="100px" id="relationship"></td>
+          <td width="60%">{{ input width="100px" valueBinding=relationship }}</td>
         </tr>
+        {{#if message}}
+        <tr>
+          <td colspan="2" style="color: red">{{message}}</td>
+        </tr>
+        {{/if}}
         <tr>
           <td colspan="2">
             {{#view 'update' id="update"}}
