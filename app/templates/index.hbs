@@ -32,6 +32,35 @@
     </div>
     {{#if isDone}}
     <p class="message">Success! Your photos were sent</p>
+    <div id="friend_info">
+      <p class="message">Who is sending these photos?</p>
+      <table>
+        <tr>
+          <td width="40%">Name:</td>
+          <td width="60%">{{ input width="100px" valueBinding=name }}</td>
+        </tr>
+        <tr>
+          <td width="40%">Email (optional):</td>
+          <td width="60%">{{ input width="100px" valueBinding=email }}</td>
+        </tr>
+        <tr>
+          <td width="40%">Relationship:</td>
+          <td width="60%">{{ input width="100px" valueBinding=relationship }}</td>
+        </tr>
+        {{#if message}}
+        <tr>
+          <td colspan="2" style="color: red">{{message}}</td>
+        </tr>
+        {{/if}}
+        <tr>
+          <td colspan="2">
+            {{#view 'update' id="update"}}
+            <input type="button" name="submit" value="Submit" class="submit">
+            {{/view}}
+          </td>
+        </tr>
+      </table>
+    </div>
     {{else}}
     <div id="done">
       <button class="btn btn-default" {{action 'done'}}>Done</button>
