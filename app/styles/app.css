@@ -65,10 +65,10 @@ html, body {
 }
 
 #btn-add {
-  background-image: url('/add_button.png');
+  background-image: url('https://fbstatic-a.akamaihd.net/rsrc.php/v2/yQ/r/KpjfgHTPu3g.png');
   background-repeat: no-repeat;
-  background-size: 62px;
-  background-position: -4px -4px;
+  background-size: auto;
+  background-position: -158px -25px;
   height: 54px;
   width: 54px;
   margin: 6px;
@@ -105,14 +105,4 @@ input[type="file"] {
   height: 20px;
 }
 
-table {
-  border-collapse: separate;
-  border-spacing: 4px;
-}
 
-.submit {
-  background-color: lightskyblue;
-  border: 1px solid lightslategray;
-  margin-top: 10px;
-  padding: 5px 40px;
-}
