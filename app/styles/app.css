@@ -65,10 +65,10 @@ html, body {
 }
 
 #btn-add {
-  background-image: url('https://fbstatic-a.akamaihd.net/rsrc.php/v2/yQ/r/KpjfgHTPu3g.png');
+  background-image: url('/add.png');
   background-repeat: no-repeat;
-  background-size: auto;
-  background-position: -158px -25px;
+  background-size: 62px;
+  background-position: -4px -4px;
   height: 54px;
   width: 54px;
   margin: 6px;
