@@ -10,7 +10,7 @@ html, body {
 }
 
 #header {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 #footer {
@@ -105,4 +105,11 @@ input[type="file"] {
   height: 20px;
 }
 
+#friend_info {
+  margin-bottom: 20px;
+}
 
+table {
+  border-spacing: 5px;
+  border-collapse: separate;
+}
