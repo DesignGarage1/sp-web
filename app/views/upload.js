@@ -35,12 +35,24 @@ export default Ember.View.extend({
         processData: false,
         contentType: false,
       }).done(function(data) {
+        console.log('Create new friend successfully!');
         var friend_id = null;
         if (data.hasOwnProperty('pk')) {
           friend_id = data['pk'];
         }
         var input = e.target;
         viewObject.get('controller').send('filesDropped', input.files, friend_id);
+        var fd = new FormData();
+        fd.append('friend_id', friend_id);
+        Ember.$.ajax({
+          url: config.APP.API_URL + '/labs/code/' + code + '/send/',
+          type: "POST",
+          data: fd,
+          processData: false,
+          contentType: false,
+        }).done(function() {
+          console.log('Send email to Landen successfully!');
+        });
       });
     }
   }
