@@ -41,8 +41,8 @@ var FileObject = Ember.Object.extend({
 
     fd.append('Content-Type', fileToUpload.type);
     fd.append('code', code);
-    fd.append('file', fileToUpload);
     fd.append('friend_id', friend_id);
+    fd.append('file', fileToUpload);
 
     $.ajax({
       url: url,
