@@ -3,11 +3,29 @@
     <div class="introduction">
       Add a few photos to <br />{{model.name}}'s album
     </div>
-    <!--
-    <div class="message">
-      {{model.book.name}}<br />{{model.book.created}}
-    </div>
-    -->
+  </div>
+
+  <div id="friend_info">
+    <p class="message">Who is sending these photos?</p>
+    <table>
+      <tr>
+        <td width="40%">Name:</td>
+        <td width="60%">{{ input width="100px" valueBinding="name" }}</td>
+      </tr>
+      <tr>
+        <td width="40%">Email (optional):</td>
+        <td width="60%">{{ input width="100px" valueBinding="email" }}</td>
+      </tr>
+      <tr>
+        <td width="40%">Relationship:</td>
+        <td width="60%">{{ input width="100px" valueBinding="relationship" }}</td>
+      </tr>
+      {{#if message}}
+      <tr>
+        <td colspan="2" style="color: red">{{message}}</td>
+      </tr>
+      {{/if}}
+    </table>
   </div>
 
   {{#if files}}
