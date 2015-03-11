@@ -26,14 +26,14 @@ export default Ember.View.extend({
   change: function(e) {
     var viewObject = this;
     var message = viewObject.validate_data();
-
-    this.get('controller').set('message', message);
+    var controller = this.get('controller');
+    controller.set('message', message);
     if (!message) {
       var friend_data = new FormData();
-      friend_data.append('name', this.get('controller').get('name'));
-      friend_data.append('email', this.get('controller').get('email'));
-      friend_data.append('relationship', this.get('controller').get('relationship'));
-      var code = this.get('controller').get('model').get('code');
+      friend_data.append('name', controller.get('name'));
+      friend_data.append('email', controller.get('email'));
+      friend_data.append('relationship', controller.get('relationship'));
+      var code = controller.get('model').get('code');
 
       Ember.$.ajax({
         url: config.APP.API_URL + '/labs/code/' + code + '/friend/',
@@ -48,18 +48,6 @@ export default Ember.View.extend({
         }
         var input = e.target;
         viewObject.get('controller').send('filesDropped', input.files, friend_id);
-
-        var send_email_data = new FormData();
-        send_email_data.append('friend_id', friend_id);
-        Ember.$.ajax({
-          url: config.APP.API_URL + '/labs/code/' + code + '/send/',
-          type: "POST",
-          data: send_email_data,
-          processData: false,
-          contentType: false,
-        }).done(function() {
-          console.log('Send email to Landen successfully!');
-        });
       });
     }
   }
