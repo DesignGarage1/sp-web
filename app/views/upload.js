@@ -9,45 +9,52 @@ export default Ember.View.extend({
   accept: 'image/*',
   type: 'file',
   multiple: 'multiple',
-  change: function(e) {
-    var viewObject = this;
-    var name = this.get('controller').get('name');
-    var email = this.get('controller').get('email');
-    var relationship = this.get('controller').get('relationship');
+  validate_data: function() {
+    var controller = this.get('controller');
+    var name = controller.get('name');
+    var email = controller.get('email');
+    var relationship = controller.get('relationship');
+    var message = '';
     if (!name) {
-      this.get('controller').set('message', 'Please input your name');
+      message = 'Please input your name';
     }
     else if (!relationship) {
-      this.get('controller').set('message', 'Please input your relationship');
+      message = 'Please input your relationship';
     }
-    else {
-      this.get('controller').set('message', '');
-      var fd = new FormData();
-      fd.append('name', name);
-      fd.append('email', email);
-      fd.append('relationship', relationship);
+    return message;
+  },
+  change: function(e) {
+    var viewObject = this;
+    var message = viewObject.validate_data();
+
+    this.get('controller').set('message', message);
+    if (!message) {
+      var friend_data = new FormData();
+      friend_data.append('name', this.get('controller').get('name'));
+      friend_data.append('email', this.get('controller').get('email'));
+      friend_data.append('relationship', this.get('controller').get('relationship'));
       var code = this.get('controller').get('model').get('code');
 
       Ember.$.ajax({
         url: config.APP.API_URL + '/labs/code/' + code + '/friend/',
         type: "POST",
-        data: fd,
+        data: friend_data,
         processData: false,
         contentType: false,
       }).done(function(data) {
-        console.log('Create new friend successfully!');
         var friend_id = null;
         if (data.hasOwnProperty('pk')) {
           friend_id = data['pk'];
         }
         var input = e.target;
         viewObject.get('controller').send('filesDropped', input.files, friend_id);
-        var fd = new FormData();
-        fd.append('friend_id', friend_id);
+
+        var send_email_data = new FormData();
+        send_email_data.append('friend_id', friend_id);
         Ember.$.ajax({
           url: config.APP.API_URL + '/labs/code/' + code + '/send/',
           type: "POST",
-          data: fd,
+          data: send_email_data,
           processData: false,
           contentType: false,
         }).done(function() {
