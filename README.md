@@ -30,7 +30,7 @@ API_URL: process.env.API_URL || 'http://localhost:8000'
 
 - ember server
 
-open link [Visit Localhost](http://localhost:4200/) => will see invalid sharing code. This is because we don't input any sharing code.
+open link [http://localhost:4200/](http://localhost:4200/) => will see invalid sharing code. This is because we don't input any sharing code.
 
 Then login to local database:
 - check if there is any record in `labs_membercode`. If yes, pick a value in a row (me is `oESCG8u4rtU`) and open page: http://localhost:4200/oESCG8u4rtU
